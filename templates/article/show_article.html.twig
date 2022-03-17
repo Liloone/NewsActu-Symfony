@@ -28,5 +28,7 @@
 		</div>
 	</div>
 
+    {# {{ render(controller('App\Controller\CommentaryController::addCommentary', ['id', article.id]) ) }} #}
+    {{ render(url('add_commentary', {'id': article.id}) ) }}
 
 {% endblock %}

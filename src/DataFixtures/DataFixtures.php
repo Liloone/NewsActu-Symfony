@@ -36,7 +36,7 @@ class DataFixtures extends Fixture
             'Santé',
             'Sciences',
             'Société',
-            'Sport',
+            'Sport'
             
         ];
        
