@@ -24,10 +24,12 @@ class AdminController extends AbstractController
     public function showDashboard(EntityManagerInterface $entityManager): Response
     {
         $articles = $entityManager->getRepository(Article::class)->findAll(['deletedAt' => null]);
+       
 
         return $this->render('admin/show_dashboard.html.twig', [
             'articles' => $articles,
         ]);
+
     }
 
     /**

@@ -28,7 +28,35 @@
 		</div>
 	</div>
 
-    {# {{ render(controller('App\Controller\CommentaryController::addCommentary', ['id', article.id]) ) }} #}
+    {# {{ render(controller('App\\Controller\\CommentaryController::addCommentary', {'id': article.id} )) }}
+  #}
     {{ render(url('add_commentary', {'id': article.id}) ) }}
+
+
+<hr>
+	<h3>Espace Commentaires</h3>
+
+	{% if commentaries is not null %}
+
+	<div class="row">
+		<div class="col-5">
+
+		{% for commentary in commentaries %}
+
+<div class="bg-light shadow my-2>
+<p class="ps3 text-muted">Créer le : {{ commentary.createdAt | date('d/m/Y H:i:s') }} | Ecris par: </p>
+<p class="ps3">{{ commentary.comment }}</p>
+		
+		
+{% else %}
+    <p>Cette article ne contient pas de commentaires. <br> Laisser le premier commentaire...</p>
+
+		</div>
+	{% endfor %}	
+	</div>
+</div>
+
+{% endif %}
+
 
 {% endblock %}
