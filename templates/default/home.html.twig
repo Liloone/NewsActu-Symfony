@@ -15,7 +15,7 @@
                     
 					<div class="card-body">
 						<h5 class="card-title">{{ article.title|length > 20 ? article.title|slice(0,20) ~ '...' : article.title }}</h5>
-                        <h6 class="card-title">{{ article.title|length > 30 ? article.title|slice(0,20) ~ '...' : article.subtitle }}</h6>
+                        <h6 class="card-title">{{ article.subtitle|length > 30 ? article.subtitle|slice(0,20) ~ '...' : article.subtitle }}</h6>
 						<p class="card-text">{{ article.content|length > 50 ? article.content|slice(0,50) ~ '...' : article.content }}</p>
 						<a href="{{ path('show_article', {'cat_alias': article.category.alias| lower, 'article_alias': article.alias| lower, 'id': article.id }) }}" class="btn btn-warning">Voir article</a>
 					</div>

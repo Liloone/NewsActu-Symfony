@@ -43,10 +43,9 @@
 
 		{% for commentary in commentaries %}
 
-<div class="bg-light shadow my-2>
+<div class="bg-light shadow my-2">
 <p class="ps3 text-muted">Créer le : {{ commentary.createdAt | date('d/m/Y H:i:s') }} | Ecris par: </p>
 <p class="ps3">{{ commentary.comment }}</p>
-		
 		
 {% else %}
     <p>Cette article ne contient pas de commentaires. <br> Laisser le premier commentaire...</p>

@@ -16,7 +16,7 @@ class DataFixtures extends Fixture
     {
         $this->slugger= $slugger;
     }
-    # Cette fonction load() sera exécuté en ligne de commande avec php bin/console doctrine:fixtures: load --append
+    # Cette fonction load() sera exécuté en ligne de commande avec php bin/console doctrine:fixtures:load --append
         # => le drapeau --append permet de nepas purger la BDD
     public function load(ObjectManager $manager): void
     {
