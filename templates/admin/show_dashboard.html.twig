@@ -7,8 +7,8 @@
 	{% include 'include/_flashes.html.twig' %}
 
 	<h3 class="text-center">Tous les articles</h3>
-	<table class="table">
-		<thead>
+	<table class="table table-bordered table-striped">
+		<thead class="table-info text-center">
 			<tr>
 				<th>Id</th>
 				<th>Catégorie</th>
@@ -21,7 +21,7 @@
 		</thead>
 		<tbody>
 			{% for article in articles | reverse %}
-				<tr>
+				<tr class="text-center">
 					<td>{{ article.id }}</td>
 					<td>{{ article.category.name }}</td>
 
@@ -32,23 +32,144 @@
 					<td>{{ article.updatedAt | date('d/m/Y') }}</td>
 					<td>
 
-					{% if article.deletedAt is null %}
+						{% if article.deletedAt is null %}
 
-					<a href="{{ path('update_article', {'id': article.id}) }}"  class="btn btn-info"><i class="fa fa-edit"></i></a> |
+							<a href="{{ path('update_article', {'id': article.id}) }}" class="btn btn-info">
+								<i class="fa fa-edit"></i>
+							</a>
+							|
 
-					<a href="{{ path('soft_delete_article', {'id': article.id}) }}" onclick="return confirm('Voulez-vous vraiment archiver cet article ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+							<a href="{{ path('soft_delete_article', {'id': article.id}) }}" onclick="return confirm('Voulez-vous vraiment archiver cet article ?')" class="btn btn-danger">
+								<i class="fa-solid fa-box-archive"></i>
+							</a>
 
-					{% else %}
+						{% else %}
 
-						
-					<a href="{{ path('restore_article', {'id': article.id}) }}"  class="btn btn-outline-info"><i class="fa fa-trash-restore"></i></a> |
 
-					<a href="{{ path('hard_delete_article', {'id': article.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet article de la base de données ?')" class="btn btn-outline-danger"><i class="fas fa-times-circle"></i></a>
+							<a href="{{ path('restore_article', {'id': article.id}) }}" class="btn btn-outline-info">
+								<i class="fa fa-trash-restore"></i>
+							</a>
+							|
 
-					{% endif %}
+							<a href="{{ path('hard_delete_article', {'id': article.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet article de la base de données ?')" class="btn btn-outline-danger">
+								<i class="fa fa-trash"></i>
+							</a>
+
+						{% endif %}
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+	<div class="row">
+		<div class="col-6">
+			<h3 class="text-center">Toutes les catégories</h3>
+			<table class="table table-bordered table-striped">
+				<thead class="table-warning text-center">
+
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Créer le</th>
+						<th>Modifier le</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for category in categories %}
+
+						<tr class="text-center">
+							<td>{{ category.id }}</td>
+							<td>{{ category.name }}</td>
+							<td>{{ category.createdAt | date('d/m/Y') }}</td>
+							<td>{{ category.updateAt | date('d/m/Y') }}</td>
+							<td>
+
+								{% if category.deletedAt is null %}
+
+									<a href="" class="btn btn-info">
+										<i class="fa fa-edit"></i>
+									</a>
+									|
+
+									<a href="" onclick="return confirm('Voulez-vous vraiment archiver cet catégorie ?')" class="btn btn-danger">
+										<i class="fa-solid fa-box-archive"></i>
+									</a>
+
+								{% else %}
+
+
+									<a href="" class="btn btn-outline-info">
+										<i class="fa fa-trash-restore"></i>
+									</a>
+									|
+
+									<a href="" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet catégorie de la base de données ?')" class="btn btn-outline-danger">
+										<i class="fa fa-trash"></i>
+									</a>
+
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-6">
+			<h3 class="text-center">Toutes les utilisateurs</h3>
+			<table class="table table-bordered table-striped">
+				<thead class="table-success text-center">
+
+					<tr>
+						<th>Id</th>
+						<th>Prénom</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+
+						<tr class="text-center">
+							<td>{{ user.id }}</td>
+							<td>{{ user.prenom }}</td>
+							<td>{{ user.nom }}</td>
+							<td>{{ user.email }}</td>
+							<td >
+
+								{% if user.deletedAt is null %}
+
+									<a href="" class="btn btn-info">
+										<i class="fa fa-edit"></i>
+									</a>
+									|
+
+									<a href="" onclick="return confirm('Voulez-vous vraiment archiver cet catégorie ?')" class="btn btn-danger">
+										<i class="fa fa-trash"></i>
+									</a>
+
+								{% else %}
+
+
+									<a href="" class="btn btn-outline-info">
+										<i class="fa fa-trash-restore"></i>
+									</a>
+									|
+
+									<a href="" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet catégorie de la base de données ?')" class="btn btn-outline-danger">
+										<i class="fas fa-times-circle"></i>
+									</a>
+
+								{% endif %}
+							</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}
