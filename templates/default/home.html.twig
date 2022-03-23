@@ -3,8 +3,10 @@
 {% block body %}
 
 	<h1 class="text-center my-3">Tous les articles</h1>
-
-	<div class="row">
+	
+	{% include 'include/_flashes.html.twig' %}
+<div class="d-flex"> 
+	<div class="row justify-content-center">
 
 		{% for article in articles %}
 
@@ -25,5 +27,5 @@
 		{% endfor %}
 
 	</div>
-
+</div>
 {% endblock %}
