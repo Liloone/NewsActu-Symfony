@@ -87,24 +87,24 @@
 
 								{% if category.deletedAt is null %}
 
-									<a href="" class="btn btn-info">
+									<a href="{{ path('update_category', {'id': category.id}) }}" class="btn btn-info">
 										<i class="fa fa-edit"></i>
 									</a>
 									|
 
-									<a href="" onclick="return confirm('Voulez-vous vraiment archiver cet catégorie ?')" class="btn btn-danger">
+									<a href="{{ path('soft_delete_category', {'id': category.id}) }}" onclick="return confirm('Voulez-vous vraiment archiver cet catégorie ?')" class="btn btn-danger">
 										<i class="fa-solid fa-box-archive"></i>
 									</a>
 
 								{% else %}
 
 
-									<a href="" class="btn btn-outline-info">
+									<a href="{{ path('restore_category', {'id': category.id}) }}" class="btn btn-outline-info">
 										<i class="fa fa-trash-restore"></i>
 									</a>
 									|
 
-									<a href="" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet catégorie de la base de données ?')" class="btn btn-outline-danger">
+									<a href="{{ path('hard_delete_category', {'id': category.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cet catégorie de la base de données ?')" class="btn btn-outline-danger">
 										<i class="fa fa-trash"></i>
 									</a>
 
