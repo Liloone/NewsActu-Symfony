@@ -51,17 +51,17 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfil" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Profil</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownProfil">
 							<li>
-								<a class="dropdown-item" href="{{ path('show_dashboard') }}">Mes informations</a>
+								<a class="dropdown-item" href="{{ path('show_profile') }}">Mes informations</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="{{ path('show_dashboard') }}">Mes commentaires</a>
+								<a class="dropdown-item" href="">Mes commentaires</a>
 							</li>
 						</ul>
 					</li>
 
 				{% endif %}
 				{# <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> </li> #}
-
+	</div>
 				{% if app.user %}
 					<div style="float: right; padding-right: 50px;">
 						<i class="fa fa-user text-primary"></i>
@@ -76,8 +76,8 @@
 				{% endif %}
 
 			</div>
-		</div>
+	
 	</nav>
-	<div class="bg-dark">
+	<div class="bg-info">
 		{{ render(url('render_categories_in_nav')) }}
 	</div>

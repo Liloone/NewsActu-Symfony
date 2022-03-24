@@ -1,11 +1,11 @@
-<div class="row">
+  <div class="row">
 
-	<p class="d-flex justify-content-around ">
+	<p class="d-flex justify-content-around">
 
 		{% for category in categories %}
 
 			<span class="d-inline pt-2">
-				<a href="{{ path('show_articles_from_category', {'alias': category.alias} ) }}" class="text-decoration-none text-light">{{ category.name }}</a>
+				<a href="{{ path('show_articles_from_category', {'alias': category.alias} ) }}" class="text-decoration-none text-dark">{{ category.name }}</a>
 			</span>
 
 		{% endfor %}

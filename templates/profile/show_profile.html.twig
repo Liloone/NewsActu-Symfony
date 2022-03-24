@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<h2 class="text-center">Mes Informations</h2>
+
+	{% include 'include/_flashes.html.twig' %}
+
+
+	<table class="table table-bordered text-center mt-5 ">
+		<thead>
+			<tr>
+				<th>Prénom</th>
+				<th>Nom</th>
+				<th>Email</th>
+				<th>Action</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>{{ app.user.prenom }}</td>
+				<td>{{ app.user.nom }}</td>
+				<td>{{ app.user.email }}</td>
+				<td>
+					<a href="{{ path('update_user', {'id': app.user.id}) }}" class="btn btn-info" title="Modifier son profil"><i class="fa fa-user-edit"></i>
+						
+					</a>
+
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<div class="row">
+		<div class="col-5">
+			<a href="#" class="btn btn-warning text-center text-dark">Changer mon mot de passe</a>
+		</div>
+	</div>
+{% endblock %}
