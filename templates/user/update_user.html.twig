@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<h1 class="text-center mx-auto my-4">Modifier ses informations</h1>
+
+	<div class="row">
+		<div class="col-6 mx-auto">
+
+			{{ form_start(form) }}
+
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(form.prenom) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(form.nom) }}
+				</div>
+				<div>
+					{{ form_row(form.email)}}
+				</div>
+			</div>
+			{{ form_end(form) }}
+
+
+		{% endblock %}
