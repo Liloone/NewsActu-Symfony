@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="row mt-3">
+    	{% include 'include/_flashes.html.twig' %}
+		<div class="col-6 mt-4">
+
+			<h3 class="text-center h4">Mes Commentaires en ligne</h3>
+
+			<table class="table table-bordered">
+
+				<thead class="table-info text-center">
+					<tr>
+						<th>contenu</th>
+						<th>Posté sur</th>
+						<th>Créer le</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if commentaries is not empty %}
+						{% for commentary in commentaries %}
+							{% if commentary.deletedAt is null %}
+
+								<tr class="text-center">
+									<td>{{ commentary.comment|slice(0,15)}}</td>
+									<td>{{ commentary.article.title |slice(0,15)}}</td>
+									<td>{{ commentary.createdAt | date('d/m/Y') }}</td>
+									<td>
+										<a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}" class="btn btn-info" title="Modifier son profil">
+											<i class="fa-solid fa-box-archive"></i>
+										</a>
+									</td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+
+				</tbody>
+			</table>
+
+		</div>
+
+		<div class="col-6 mt-4">
+
+			<h3 class="text-center h4">Mes Commentaires archivés</h3>
+
+			<table class="table table-bordered">
+
+				<thead class="table-info text-center">
+					<tr>
+						<th>contenu</th>
+						<th>Posté sur</th>
+						<th>Créer le</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if commentaries is not empty %}
+						{% for commentary in commentaries %}
+							{% if commentary.deletedAt is not null %}
+
+								<tr class="text-center">
+									<td>{{ commentary.comment|slice(0,15)}}</td>
+									<td>{{ commentary.article.title |slice(0,15)}}</td>
+									<td>{{ commentary.createdAt | date('d/m/Y') }}</td>
+									<td>
+										<a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}" class="btn btn-info" title="Modifier son profil">
+											<i class="fa fa-trash-restore"></i>
+										</a>
+									</td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

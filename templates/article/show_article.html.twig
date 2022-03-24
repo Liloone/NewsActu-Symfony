@@ -17,7 +17,14 @@
 					<p class="h4 text-center mb-3 text-secondary">{{ article.subtitle}}</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item text-center text-muted">Créé le {{ article.createdAt | date('d/m/Y H:i:s') }} <span class="text-muted">Mis à jour le {{ article.updatedAt | date('d/m/Y H:i:s') }} | Auteur : {{ article.author.prenom }} {{ article.author.nom }}</span> </li>
+					<li class="list-group-item text-center text-muted">Créé le
+						{{ article.createdAt | date('d/m/Y H:i:s') }}
+						<span class="text-muted">Mis à jour le
+							{{ article.updatedAt | date('d/m/Y H:i:s') }}
+							| Auteur :
+							{{ article.author.prenom }}
+							{{ article.author.nom }}</span>
+					</li>
 				</ul>
 				<img class="img-custom" src="{{ asset('uploads/') ~ article.photo }}" alt="{{article.title}}">
 				<div class="card-body">
@@ -27,42 +34,70 @@
 
 		</div>
 	</div>
-{% if app.user %}
-    {# {{ render(controller('App\\Controller\\CommentaryController::addCommentary', {'id': article.id} )) }}
-  #}
-    {{ render(url('add_commentary', {'id': article.id}) ) }}
-	{% else %}
-	<div class="row">
-		<div class="col-8 mx-auto text-center my-3">
-		<p class="h4">Vous devez être connecté pour commentercet article</p>
-		<a class="d-block col-2 btn btn-warning mx-auto" href="{{ path('app_login') }}">Connexion</a>
-		</div>
-	</div>
+	{% if app.user %}
+		{# {{ render(controller('App\\Controller\\CommentaryController::addCommentary', {'id': article.id} )) }} #}
+												 
+		{{ render(url('add_commentary', {'id': article.id}) ) }}
 
-{% endif %}
-<hr>
+	{% else %}
+		<div class="row">
+			<div class="col-8 mx-auto text-center my-3">
+				<p class="h4">Vous devez être connecté pour commenter cet article</p>
+				<a class="d-block col-2 btn btn-warning mx-auto" href="{{ path('app_login') }}">Connexion</a>
+			</div>
+		</div>
+
+	{% endif %}
+	<hr>
 	<h3>Espace Commentaires</h3>
 
 	{% if commentaries is not null %}
 
-	<div class="row">
-		<div class="col-5">
+		<div class="row">
+			<div class="col-5">
 
-		{% for commentary in commentaries %}
+				{% for commentary in commentaries %}
+					{% if commentary.deletedAt is null %}
 
-<div class="bg-light shadow my-2">
-<p class="ps3 text-muted">Créer le : {{ commentary.createdAt | date('d/m/Y H:i:s') }} | Ecris par: </p>
-<p class="ps3">{{ commentary.comment }}</p>
-		
-{% else %}
-    <p>Cette article ne contient pas de commentaires. <br> Laisser le premier commentaire...</p>
+						<div class="bg-light shadow my-2">
 
+							{% if commentary.author is same as app.user %}
+								<span style="float: right" class="pe-2" onclick="return confirm('Voulez-vous archiver ce commentaire ? \rVous retrouverez ces commentaires dans la partie Mes commentaires de votre profil.')">
+
+									{#================= 1ère FAÇON =========================#
+									===> Suite du commentaires de CommentaryController::softdeletecommentary()
+									Ici nous avons construit grâce au symbole '?', dans le 'href' après le {{ path() }}, notre URL avec les arguments necessaire pour la redirection (voir CommentaryController)
+
+								{# <a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}?cat_alias={{ article.category.alias }}&article_alias={{ article.alias }}&article_id={{ article.id }}" class="text-danger"><i class="fa fa-times-circle"></i></a>#}
+									{#=========================================================#}
+
+									{#================= 2ème FAÇON =========================#
+									===> Suite du commentaires de CommentaryController::softdeletecommentary()
+										Ici nous avons retiré tous les paramètres dans l'URL. (exeoté le paramètre OBLIGATOIRE de la route {id})
+										#}
+
+										<a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}" class="text-danger"> <i class="fa fa-times-circle"></i>
+									</a>
+									{#=========================================================#}
+
+								</span>
+							{% endif %}
+							<p class="ps3 text-muted">Créer le :
+								{{ commentary.createdAt | date('d/m/Y H:i:s') }}
+								| Ecris par:{{ commentary.author ? commentary.author.prenom ~ ' ' ~ commentary.author.nom : "Pas d'auteur" }}
+							</p>
+
+							<p class="ps3">{{ commentary.comment }}</p>
+
+						</div>
+
+
+					{% endif %}
+				{% endfor %}
+			</div>
 		</div>
-	{% endfor %}	
-	</div>
-</div>
 
-{% endif %}
+	{% endif %}
 
 
 {% endblock %}
