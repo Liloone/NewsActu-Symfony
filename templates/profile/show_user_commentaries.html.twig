@@ -15,24 +15,35 @@
 						<th>contenu</th>
 						<th>Posté sur</th>
 						<th>Créer le</th>
+						<th>Nombre de<br>commentaires</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% if commentaries is not empty %}
+
+					{% set countIn = 0 %}
+                {% set countOut = 0 %}
+
 						{% for commentary in commentaries %}
 							{% if commentary.deletedAt is null %}
+								{% set countIn = countIn +1 %}
 
 								<tr class="text-center">
 									<td>{{ commentary.comment|slice(0,15)}}</td>
 									<td>{{ commentary.article.title |slice(0,15)}}</td>
 									<td>{{ commentary.createdAt | date('d/m/Y') }}</td>
+									{# <td>{{ total }}</td> #}
+									<td>{{ totalInline }}</td>
+									{# <td>{{ commentaries is not empty ? commentaries | length : '0' }}</td> #}
 									<td>
 										<a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}" class="btn btn-danger" title="Archiver son commentaire">
 											<i class="fa-solid fa-box-archive"></i>
 										</a>
 									</td>
 								</tr>
+								{% else %}
+								{% set countOut = countOut + 1 %}
 							{% endif %}
 						{% endfor %}
 					{% endif %}
@@ -53,6 +64,7 @@
 						<th>contenu</th>
 						<th>Posté sur</th>
 						<th>Créer le</th>
+						<th>Nombre de<br>commentaires</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -65,8 +77,10 @@
 									<td>{{ commentary.comment|slice(0,15)}}</td>
 									<td>{{ commentary.article.title |slice(0,15)}}</td>
 									<td>{{ commentary.createdAt | date('d/m/Y') }}</td>
+									{# <td>{{ countOut }}</td> #}
+									<td>{{ totalArchived }}</td>
 									<td>
-										<a href="{{ path('soft_delete_commentary', {'id': commentary.id}) }}" class="btn btn-info" title="Restaurer son commentaire">
+										<a href="{{ path('restore_commentary', {'id': commentary.id}) }}" class="btn btn-info" title="Restaurer son commentaire">
 											<i class="fa fa-trash-restore"></i>
 										</a>
 									</td>
@@ -77,8 +91,10 @@
 
 				</tbody>
 			</table>
+			
 		</div>
+		<p>total {{ countOut }}</p>
 	</div>
-
+	
 
 {% endblock %}

@@ -36,13 +36,13 @@
 							</li>
 							<li>
 								<a class="dropdown-item" href="{{ path('create_article') }}">Ajouter un 
-								article</a>
+																	article</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href="{{ path('create_category') }}">Ajouter une categorie</a>
 							</li>
 							{# <li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li> #}
+														<li><a class="dropdown-item" href="#">Something else here</a></li> #}
 						</ul>
 					</li>
 
@@ -61,22 +61,26 @@
 
 				{% endif %}
 				{# <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> </li> #}
-	</div>
-				{% if app.user %}
-					<div style="float: right; padding-right: 50px;">
-						<i class="fa fa-user text-primary"></i>
-						<span class="text-primary">
-							Bonjour,
-							<span class="text-dark">
-								{{ app.user.prenom }}
-								{{ app.user.nom }}
-							</span>
-						</span>
-					</div>
-				{% endif %}
 
 			</div>
-	
+			<div class="col-6">
+				{{ render(url('render_search_bar')) }}
+			</div>
+			{% if app.user %}
+				<div style="float: right; padding-right: 50px;">
+					<i class="fa fa-user text-primary"></i>
+					<span class="text-primary">
+						Bonjour,
+						<span class="text-dark">
+							{{ app.user.prenom }}
+							{{ app.user.nom }}
+						</span>
+					</span>
+				</div>
+			{% endif %}
+
+		</div>
+
 	</nav>
 	<div class="bg-info">
 		{{ render(url('render_categories_in_nav')) }}

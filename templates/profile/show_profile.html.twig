@@ -36,7 +36,13 @@
 
 	<div class="row">
 		<div class="col-5">
-			<a href="#" class="btn btn-warning text-center text-dark">Changer mon mot de passe</a>
+			<a href="{{ path('change_user_password') }}" class="btn btn-warning text-center text-dark">Changer mon mot de passe</a>
 		</div>
 	</div>
+	
+	<div class="row">
+		<div class="col-5">
+			<a href="{{ path('app_forgot_password_request') }}" class="btn btn-warning text-center text-dark">Réinitialiser le mot de passe</a>
+		</div>
+
 {% endblock %}

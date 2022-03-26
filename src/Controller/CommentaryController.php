@@ -115,4 +115,20 @@ class CommentaryController extends AbstractController
         #=========================================================#
         // return $this->redirectToRoute('show_article');
     }
+
+     /**
+     * @Route("/restaurer-un-commentaire/{id}", name="restore_commentary", methods={"GET"})
+     */
+    public function restoreCommentary(Commentary $commentary, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $commentary->setDeletedAt();
+
+        $entityManager->persist($commentary);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Votre commentaire à bien été restaurée");
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
+
 }

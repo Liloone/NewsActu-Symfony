@@ -24,8 +24,22 @@ return $this->render('profile/show_profile.html.twig');
 public function showUserCommentaries(EntityManagerInterface $entityManager): Response
 {
     $commentaries = $entityManager->getRepository(Commentary::class)->findBy(['author' => $this->getUser()]);
+// Statistique depuis le controller (voir la vue show_user_commentaries.html.twig)
+$total = count($commentaries);
+$totalInline = count($entityManager->getRepository(Commentary::class)->findBy(['deletedAt' => null, 'author' => $this->getUser()]));
+$totalArchived = 0;
+
+foreach($commentaries as $commentary) {
+    if($commentary->getDeletedAt() != null){
+        ++$totalArchived;
+    }
+}
+
 return $this->render('profile/show_user_commentaries.html.twig', [
-    'commentaries' => $commentaries
+    'commentaries' => $commentaries,
+    'total' => $total,
+    'totalInline' => $totalInline,
+    'totalArchived' => $totalArchived
 ]);
 }
 }
